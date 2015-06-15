@@ -44,4 +44,4 @@ I would like to play a two-player game
 
 Current status:
 We will start by creating a very basic board and using TDD and OOD
-to take it step by step, hopefully implementing each user story as we go along. 
+to take it step by step, hopefully implementing each user story as we go along.
