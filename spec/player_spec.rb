@@ -9,4 +9,12 @@ describe Player do
       expect(subject.place '1', [0]).to eq ['1']
     end
   end
+
+  describe 'fire' do
+    it 'fires at the board' do
+      expect(subject.fire).to eq 'You win!'
+    end
+  end
+
+
 end
