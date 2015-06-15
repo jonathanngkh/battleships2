@@ -6,7 +6,7 @@ describe Board do
 
   describe 'dimensions' do
     it 'creates a board with the given dimensions' do
-      expect(subject.dimensions 2).to eq [[nil, nil], [nil, nil]]
+      expect(subject.dimensions 2).to eq [['0', '0'], ['0', '0']]
     end
   end
 
