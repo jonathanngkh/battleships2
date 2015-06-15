@@ -43,5 +43,4 @@ I would like to play a two-player game
 
 
 Current status:
-We will start by creating a very basic board and using TDD and OOD
-to take it step by step, hopefully implementing each user story as we go along.
+We have created a basic game for a 1x1 board, that allows a player to create a board, a ship, place the ship, and fire, thus winning the game.
