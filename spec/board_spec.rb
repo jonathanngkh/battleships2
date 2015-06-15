@@ -9,5 +9,4 @@ describe Board do
       expect(subject.dimensions 2).to eq [['0', '0'], ['0', '0']]
     end
   end
-
 end

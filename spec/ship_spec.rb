@@ -10,7 +10,11 @@ describe Ship do
     end
   end
 
-
-
-
+  describe 'sunk?' do
+    it 'says if a ship is sunk' do
+      board = double :board
+      board = ['X']
+      expect(subject.sunk? board).to eq true
+    end
+  end
 end

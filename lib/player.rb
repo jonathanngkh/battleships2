@@ -5,7 +5,7 @@ class Player
     board[0] = [ship]
   end
 
-  def fire
-    'You win!'
+  def fire location, board
+    board[0] = ['X']
   end
 end
