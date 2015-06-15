@@ -1,5 +1,8 @@
 # battleships
 
+****BRANCH BROKEN, WORKING FROM SKATEBOARD TO SCOOTER TO BIKE TO MOTORBIKE TO CAR :)********
+
+
 Our objective is to create the game battleships implemented with
 the following user stories below...
 
@@ -40,7 +43,3 @@ I would like an overview of my hits and misses so far
 As a player
 So that I can play against a human opponent
 I would like to play a two-player game
-
-
-Current status:
-We have created a basic game for a 1x1 board, that allows a player to create a board, a ship, place the ship, and fire, thus winning the game.
