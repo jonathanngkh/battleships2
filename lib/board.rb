@@ -10,6 +10,7 @@ class Board
 
   def place(ship, location)
     ship.position = location.split(', ')
+    #ship.lives 
     fleet << ship
   end
 
@@ -18,6 +19,6 @@ class Board
       return 'Hit!' if ship.position.include?(location)
       return 'Miss!'
     end
-
   end
+
 end
