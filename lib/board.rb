@@ -6,4 +6,8 @@ class Board
     @fleet = []
   end
 
+  def place(ship, location)
+    fleet << ship
+  end
+
 end
