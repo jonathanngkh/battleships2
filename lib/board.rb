@@ -1,9 +1,9 @@
 class Board
 
-  attr_reader :fleet
+  attr_accessor :fleet
 
-def initialize
-  @fleet = []
-end
+  def initialize
+    @fleet = []
+  end
 
 end
