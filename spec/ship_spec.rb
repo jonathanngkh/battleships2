@@ -19,6 +19,7 @@ describe Ship do
     end
   end
 
+  
 
 
   # it 'records when it has been hit' do

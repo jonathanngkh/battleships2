@@ -16,8 +16,12 @@ class Board
 
   def fire(location)
     fleet.each do |ship|
-      return 'Hit!' if ship.position.include?(location)
-      return 'Miss!'
+      if ship.position.include?(location)
+        ship.hit
+        return 'Hit!' 
+      else
+        return 'Miss!'
+      end
     end
   end
 

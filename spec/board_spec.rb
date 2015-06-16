@@ -44,11 +44,12 @@ describe Board do
 
     it 'registers a hit when called' do
       ship = double :ship
-      allow(ship).to receive(:position=).with( ['A1'] )
+      allow(ship).to receive(:position=).with(['A1'])
       allow(ship).to receive(:lives=)
       allow(ship).to receive(:position).and_return(['A1'])
       subject.place(ship, 'A1')
       allow(ship).to receive(:position).and_return(['A1'])
+      allow(ship).to receive(:hit)
       expect(subject.fire('A1')).to eq('Hit!')
     end
 
@@ -58,5 +59,16 @@ describe Board do
       subject.place(ship, 'A2')
       expect(subject.fire('A1')).to eq('Miss!')
     end
+
+    it 'hits the ship when firing a location with a ship in it' do
+      ship = double :ship
+      allow(ship).to receive(:position=).with(['A1'])
+      allow(ship).to receive(:lives=)
+      allow(ship).to receive(:position).and_return(['A1'])
+      subject.place(ship, 'A1')
+      expect(ship).to receive(:hit)
+      subject.fire('A1')
+    end
+
   end
 end
