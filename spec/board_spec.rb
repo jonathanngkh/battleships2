@@ -47,6 +47,8 @@ describe Board do
     end
 
     it 'registers a miss when called but no boat in location' do
+      ship = double :ship, :position= => ['A2'], :position => ['A2']
+      subject.place(ship, 'A2')
       expect(subject.fire('A1')).to eq('Miss!')
     end
   end
