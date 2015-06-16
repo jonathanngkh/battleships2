@@ -9,13 +9,13 @@ class Board
   end
 
   def place(ship, location)
-    ship.position = location
+    ship.position = location.split(', ')
     fleet << ship
   end
 
   def fire(location)
-    fleet.each do |ship| 
-      return 'Hit!' if ship.position == location
+    fleet.each do |ship|
+      return 'Hit!' if ship.position.include?(location)
       return 'Miss!'
     end
 

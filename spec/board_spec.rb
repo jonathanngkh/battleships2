@@ -18,13 +18,18 @@ describe Board do
 
     it 'stores the ship in the fleet' do
       ship = Ship.new
-      expect { subject.place(ship, :location) }.to change { subject.fleet.length }.from(0).to(1)
+      expect { subject.place(ship, 'A1') }.to change { subject.fleet.length }.from(0).to(1)
     end
 
     it 'sets the position of the ship as it is being placed' do
       #ship = double :ship, :position => ''
       ship = Ship.new
-      expect { subject.place(ship, "A1") }.to change { ship.position }.from('').to('A1')
+      expect { subject.place(ship, "A1") }.to change { ship.position }.from([]).to(['A1'])
+    end
+
+    it 'sets the position of the ship even with multiple positions' do
+      ship = Ship.new
+      expect { subject.place(ship, "A1, A2") }.to change { ship.position }.from([]).to(['A1', 'A2'])
     end
   end
 
