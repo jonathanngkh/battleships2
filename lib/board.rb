@@ -13,4 +13,11 @@ class Board
     fleet << ship
   end
 
+  def fire(location)
+    fleet.each do |ship| 
+      return 'Hit!' if ship.position == location
+      return 'Miss!'
+    end
+
+  end
 end
