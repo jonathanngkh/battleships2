@@ -24,7 +24,6 @@ describe Board do
 
     it 'sets the position of the ship as it is being placed' do
       ship = double :ship, :position => []
-      #ship = Ship.new
       expect(ship).to receive(:position=).with(["A1"])
       subject.place(ship, 'A1')
     end
@@ -51,10 +50,4 @@ describe Board do
       expect(subject.fire('A1')).to eq('Miss!')
     end
   end
-
-
-
-
-
-
 end
