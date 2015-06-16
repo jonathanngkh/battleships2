@@ -1,3 +1,5 @@
+require_relative 'ship'
+
 class Board
 
   attr_accessor :fleet
@@ -7,6 +9,7 @@ class Board
   end
 
   def place(ship, location)
+    ship.position = location
     fleet << ship
   end
 
