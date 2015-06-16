@@ -5,9 +5,9 @@ class Ship
     @position = []
   end
 
-  # def hit
-
-  # end
+  def hit
+    self.lives -= 1
+  end
 
 
 end
