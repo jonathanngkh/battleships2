@@ -10,9 +10,15 @@ describe Ship do
     expect(subject).to respond_to(:lives)
   end
 
-  it 'has the same number of lives as its size' do
-    subject.position = ['A1', 'A2']
-    expect(subject.lives).to eq(subject.position.length)
-  end
+  # it 'records when it has been hit' do
+  #   expect(subject).to respond_to(:hit)
+  # end
+
+  # describe 'getting hit' do
+
+  #   it 'reduces the number of lives when hit'
+
+  # end
+
 
 end

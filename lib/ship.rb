@@ -5,8 +5,10 @@ class Ship
     @position = []
   end
 
-  def lives
-    @lives = position.length
-  end
+  # def hit
+
+  # end
+
+
 end
 

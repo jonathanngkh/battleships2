@@ -10,7 +10,7 @@ class Board
 
   def place(ship, location)
     ship.position = location.split(', ')
-    #ship.lives 
+    ship.lives = ship.position.length
     fleet << ship
   end
 
