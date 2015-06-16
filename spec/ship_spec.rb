@@ -10,16 +10,16 @@ describe Ship do
     expect(subject).to respond_to(:lives)
   end
 
-  it { is_expected.to respond_to(:hit) }
+  it { is_expected.to respond_to(:hit).with(1).argument }
 
   describe 'hit' do
     it 'subtracts lives by 1 when hit' do
       subject.lives = 1
-      expect { subject.hit }.to change { subject.lives }.by(-1)
+      expect { subject.hit('A1') }.to change { subject.lives }.by(-1)
     end
   end
 
-  
+
 
 
   # it 'records when it has been hit' do

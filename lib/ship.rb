@@ -5,8 +5,9 @@ class Ship
     @position = []
   end
 
-  def hit
+  def hit(location)
     self.lives -= 1
+    #position.delete_if { |coordinate| coordinate == location }
   end
 
 

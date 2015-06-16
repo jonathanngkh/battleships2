@@ -17,11 +17,13 @@ class Board
   def fire(location)
     fleet.each do |ship|
       if ship.position.include?(location)
-        ship.hit
-        return 'Hit!' 
+        ship.hit(location)
+        #fleet.delete_if { |ship| ship.lives == 0 }
+        return 'Hit!'
       else
         return 'Miss!'
       end
+
     end
   end
 
