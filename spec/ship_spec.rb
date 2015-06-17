@@ -17,7 +17,7 @@ describe Ship do
       subject.lives = 1
       expect { subject.hit('A1') }.to change { subject.lives }.by(-1)
     end
-
+    
     it 'deletes a position from its position array if hit' do
       ship = Ship.new
       ship.lives = 1
@@ -25,5 +25,4 @@ describe Ship do
       expect { ship.hit('A1') }.to change { ship.position.length }.by(-1)
     end
   end
-
 end

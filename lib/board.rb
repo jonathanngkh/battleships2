@@ -20,15 +20,18 @@ class Board
         ship.hit(location)
         puts_hit
         fleet.delete_if { |ship| ship.lives == 0 }
+        puts "Game over!" if won?
       else
         return 'Miss!'
       end
     end
+  end
 
+  def won?
+    fleet == []
   end
 
   def puts_hit
     puts 'Hit!'
   end
-
 end

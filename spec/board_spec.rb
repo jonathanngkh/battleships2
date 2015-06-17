@@ -14,6 +14,11 @@ describe Board do
 
   it { is_expected.to respond_to(:fire).with(1).argument }
 
+  it 'knows when the game is over i.e. fleet is empty' do
+    subject.fleet = []
+    expect(subject.won?).to eq true
+  end
+
   describe 'placing' do
 
     it 'stores the ship in the fleet' do
@@ -67,6 +72,5 @@ describe Board do
       subject.fleet << ship
       expect { subject.fire("A1") }.to change { subject.fleet.length }.by(-1)
     end
-
   end
 end
