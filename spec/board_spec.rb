@@ -1,91 +1,74 @@
 require 'board'
 
 describe Board do
-  
-  it { is_expected.to respond_to :place_ship }
 
-
-  it 'has a grid width of 10' do
-  	expect(subject.width).to eq 10
+  it 'has a fleet of ships' do
+    expect(subject).to respond_to(:fleet)
   end
 
-  it 'has a grid height of 10' do
-    expect(subject.height).to eq 10
+  it 'has an empty fleet at the start' do
+    expect(subject.fleet).to be_empty
   end
-   
-  it 'only holds 5 ships' do
-    ship = double :ship
-    5.times do |size|
-      ship = double :ship, { size: size }
-      allow(ship).to receive(:x=) {1}
-      allow(ship).to receive(:y=) {1}
-      subject.place_ship ship, 1, 1, 'vertical'
+
+  it { is_expected.to respond_to(:place).with(2).arguments }
+
+  it { is_expected.to respond_to(:fire).with(1).argument }
+
+  describe 'placing' do
+
+    it 'stores the ship in the fleet' do
+      ship = double :ship
+      allow(ship).to receive(:position=)
+      allow(ship).to receive(:position).and_return(['A1'])
+      allow(ship).to receive(:lives=)
+      expect { subject.place(ship, 'A1') }.to change { subject.fleet.length }.from(0).to(1)
     end
-    expect{subject.place_ship ship, 1, 1, 'vertical'}.to raise_error 'No more space'
+
+    it 'sets the position of the ship as it is being placed' do
+      ship = double :ship, :position => []
+      allow(ship).to receive(:lives=)
+      expect(ship).to receive(:position=).with(["A1"])
+      subject.place(ship, 'A1')
+    end
+
+    it 'sets the position of the ship even with multiple positions' do
+      ship = double :ship
+      allow(ship).to receive(:position).and_return(['A1', 'A2'])
+      allow(ship).to receive(:lives=)
+      expect(ship).to receive(:position=).with(["A1", "A2"])
+      subject.place(ship, "A1, A2")
+    end
   end
 
-  it 'can only hold one ship of each size' do 
-    ship = double :ship, size: 4
-    ship2 = double :ship, size: 4
-    allow(ship).to receive(:x=) {3} 
-    allow(ship).to receive(:y=) {4}
-    allow(ship2).to receive(:x=) {1} 
-    allow(ship2).to receive(:y=) {2}
-    subject.place_ship ship, 3, 4, 'horizontal'
-    expect{subject.place_ship ship2, 1, 2, 'vertical'}.to raise_error "There is already a ship of that size"
+  describe 'firing' do
+
+    it 'registers a hit when called' do
+      ship = double :ship
+      allow(ship).to receive(:position=).with(['A1'])
+      allow(ship).to receive(:lives=)
+      allow(ship).to receive(:position).and_return(['A1'])
+      subject.place(ship, 'A1')
+      allow(ship).to receive(:position).and_return(['A1'])
+      allow(ship).to receive(:hit)
+      expect(subject.fire('A1')).to eq('Hit!')
+    end
+
+    it 'registers a miss when called but no boat in location' do
+      ship = double :ship, :position= => ['A2'], :position => ['A2']
+      allow(ship).to receive(:lives=)
+      subject.place(ship, 'A2')
+      expect(subject.fire('A1')).to eq('Miss!')
+    end
+
+    it 'hits the ship when firing a location with a ship in it' do
+      ship = double :ship
+      allow(ship).to receive(:position=).with(['A1'])
+      allow(ship).to receive(:lives=)
+      allow(ship).to receive(:position).and_return(['A1'])
+      subject.place(ship, 'A1')
+      expect(ship).to receive(:hit)
+      subject.fire('A1')
+    end
+
   end
-
-  it 'Allows a ship to be hit' do 
-    ship = double :ship
-    allow(ship).to receive(:x=) {1} 
-    allow(ship).to receive(:y=) {1}
-    allow(ship).to receive(:x) {1}
-    allow(ship).to receive(:y) {1}
-    subject.place_ship ship, 1, 1, 'horizontal'
-    expect(subject.receive_hit 1, 1).to eq 'hit!' 
-  end
-
-  it 'Can return miss' do 
-    expect(subject.receive_hit 1, 1).to eq 'miss!'
-  end
-
-  it 'return Winner when all ships have been sunk' do 
-    ship = double :ship, size: 1
-    allow(ship).to receive(:x=) {1} 
-    allow(ship).to receive(:y=) {1}
-    allow(ship).to receive(:x) {1}
-    allow(ship).to receive(:y) {1}
-    subject.place_ship ship, 1, 1, 'horizontal'
-    subject.receive_hit 1, 1
-    expect(subject.win?).to eq true
-  end
-
-  it 'doesnt allow two hits (same for misses)' do
-    ship = double :ship
-    allow(ship).to receive(:x=) {1} 
-    allow(ship).to receive(:y=) {1}
-    allow(ship).to receive(:x) {1}
-    allow(ship).to receive(:y) {1}
-    subject.place_ship ship, 1, 1, 'horizontal'
-    subject.receive_hit 1, 1
-    expect{ subject.receive_hit 1, 1 }.to raise_error 'Already guessed'
-  end
-
-  it 'doesnt allow any ships to be placed outside of the board' do 
-    ship = double :ship, size: 3
-    allow(ship).to receive(:x) {9}
-    allow(ship).to receive(:y) {3}
-    allow(ship).to receive(:x2) {11}
-    allow(ship).to receive(:y2) {3}
-    allow(ship).to receive(:x=) {9} 
-    allow(ship).to receive(:y=) {3}
-    allow(ship).to receive(:x2=) {11} 
-    allow(ship).to receive(:y2=) {3}
-    expect{ subject.place_ship ship, 9, 3, 'horizontal' }.to raise_error "Cannot place here"
-  end
-
-
-
-
-
 end

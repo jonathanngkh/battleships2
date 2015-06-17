@@ -2,27 +2,35 @@ require 'ship'
 
 describe Ship do
 
-  it 'A new ship should have a given size' do 
-    ship=Ship.new 4
-    expect(ship.size).to eq 4
-  end 
-
-  it 'Send and error if ship is too big' do 
-    expect{Ship.new 6}.to raise_error 'Wrong size ship'
+  it 'has a position' do
+    expect(subject).to respond_to(:position)
   end
 
-  it 'Send and error if ship is too small' do 
-    expect{Ship.new 1}.to raise_error 'Wrong size ship'
+  it 'has a record of the number of lives' do
+    expect(subject).to respond_to(:lives)
   end
 
-  it 'Knows its been hit' do 
-    subject=Ship.new 3
-    expect(subject.hit).to eq 1
+  it { is_expected.to respond_to(:hit).with(1).argument }
+
+  describe 'hit' do
+    it 'subtracts lives by 1 when hit' do
+      subject.lives = 1
+      expect { subject.hit('A1') }.to change { subject.lives }.by(-1)
+    end
   end
 
-  it 'Knows its been sunk' do
-    subject=Ship.new 2
-    subject.hit
-    expect(subject.hit).to eq true
-  end
+
+
+
+  # it 'records when it has been hit' do
+  #   expect(subject).to respond_to(:hit)
+  # end
+
+  # describe 'getting hit' do
+
+  #   it 'reduces the number of lives when hit'
+
+  # end
+
+
 end
