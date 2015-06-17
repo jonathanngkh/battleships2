@@ -17,20 +17,13 @@ describe Ship do
       subject.lives = 1
       expect { subject.hit('A1') }.to change { subject.lives }.by(-1)
     end
+
+    it 'deletes a position from its position array if hit' do
+      ship = Ship.new
+      ship.lives = 1
+      ship.position = ["A1"]
+      expect { ship.hit('A1') }.to change { ship.position.length }.by(-1)
+    end
   end
-
-
-
-
-  # it 'records when it has been hit' do
-  #   expect(subject).to respond_to(:hit)
-  # end
-
-  # describe 'getting hit' do
-
-  #   it 'reduces the number of lives when hit'
-
-  # end
-
 
 end

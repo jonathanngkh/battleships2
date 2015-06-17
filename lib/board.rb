@@ -18,13 +18,17 @@ class Board
     fleet.each do |ship|
       if ship.position.include?(location)
         ship.hit(location)
-        #fleet.delete_if { |ship| ship.lives == 0 }
-        return 'Hit!'
+        puts_hit
+        fleet.delete_if { |ship| ship.lives == 0 }
       else
         return 'Miss!'
       end
-
     end
+
+  end
+
+  def puts_hit
+    puts 'Hit!'
   end
 
 end

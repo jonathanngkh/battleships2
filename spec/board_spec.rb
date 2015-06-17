@@ -17,9 +17,8 @@ describe Board do
   describe 'placing' do
 
     it 'stores the ship in the fleet' do
-      ship = double :ship
+      ship = double :ship, :position => ["A1"]
       allow(ship).to receive(:position=)
-      allow(ship).to receive(:position).and_return(['A1'])
       allow(ship).to receive(:lives=)
       expect { subject.place(ship, 'A1') }.to change { subject.fleet.length }.from(0).to(1)
     end
@@ -43,14 +42,10 @@ describe Board do
   describe 'firing' do
 
     it 'registers a hit when called' do
-      ship = double :ship
-      allow(ship).to receive(:position=).with(['A1'])
-      allow(ship).to receive(:lives=)
-      allow(ship).to receive(:position).and_return(['A1'])
-      subject.place(ship, 'A1')
-      allow(ship).to receive(:position).and_return(['A1'])
-      allow(ship).to receive(:hit)
-      expect(subject.fire('A1')).to eq('Hit!')
+      ship = double :ship, :position => ['A1'], :hit => 'A1', :lives => 1
+      subject.fleet << ship
+      expect(subject).to receive(:puts_hit)
+      subject.fire('A1')
     end
 
     it 'registers a miss when called but no boat in location' do
@@ -61,13 +56,16 @@ describe Board do
     end
 
     it 'hits the ship when firing a location with a ship in it' do
-      ship = double :ship
-      allow(ship).to receive(:position=).with(['A1'])
-      allow(ship).to receive(:lives=)
-      allow(ship).to receive(:position).and_return(['A1'])
-      subject.place(ship, 'A1')
-      expect(ship).to receive(:hit)
+      ship = double :ship, :position => ['A1'], :lives => 1
+      subject.fleet << ship
+      expect(ship).to receive(:hit).with('A1')
       subject.fire('A1')
+    end
+
+    it 'deletes a ship from the fleet if it is out of lives' do
+      ship = double :ship, :lives => 0, :position => ["A1"], :hit => "A1"
+      subject.fleet << ship
+      expect { subject.fire("A1") }.to change { subject.fleet.length }.by(-1)
     end
 
   end
