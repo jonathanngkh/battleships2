@@ -42,6 +42,12 @@ describe Board do
       expect(ship).to receive(:position=).with(["A1", "A2"])
       subject.place(ship, "A1, A2")
     end
+
+    it 'doesnt allow you to overlap ships' do
+      subject.placed_ships = ["A1"]
+      ship = double :ship, :position= => [], :lives= => 1, :position => 'A1'
+      expect { subject.place(ship, "A1") }.to raise_error "You cant place a ship here"
+    end
   end
 
   describe 'firing' do
