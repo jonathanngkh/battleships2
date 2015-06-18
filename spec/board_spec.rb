@@ -48,6 +48,10 @@ describe Board do
       ship = double :ship, :position= => [], :lives= => 1, :position => 'A1'
       expect { subject.place(ship, "A1") }.to raise_error "You cant place a ship here"
     end
+
+    xit 'places ships into the cells hash'
+
+    xit 'prints the board with placed ships'
   end
 
   describe 'firing' do
@@ -78,5 +82,9 @@ describe Board do
       subject.fleet << ship
       expect { subject.fire("A1") }.to change { subject.fleet.length }.by(-1)
     end
+
+    xit 'marks the board with an explosion and prints the board if hit'
+
+    xit 'marks the board with a no-deal girl and prints the board if missed'
   end
 end
