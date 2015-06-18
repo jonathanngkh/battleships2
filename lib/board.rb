@@ -57,10 +57,11 @@ class Board
         print_board_hit(location)
         puts_hit
         puts "Game over!" if won?
+        print_board_gg
         break
       end
         print_board_miss(location)
-        puts "Miss!"
+        return "Miss!"
     end
   end
 
@@ -176,6 +177,58 @@ class Board
 
   def print_board
     require 'terminal-table'
+
+    table = Terminal::Table.new do |rows|
+    rows << ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+    rows << :separator
+    rows << [1, cells['A1'], cells['B1'], cells['C1'], cells['D1'], cells['E1'], cells['F1'], cells['G1'], cells['H1'], cells['I1'], cells['J1']]
+    rows << :separator
+    rows << [2, cells['A2'], cells['B2'], cells['C2'], cells['D2'], cells['E2'], cells['F2'], cells['G2'], cells['H2'], cells['I2'], cells['J2']]
+    rows << :separator
+    rows << [3, cells['A3'], cells['B3'], cells['C3'], cells['D3'], cells['E3'], cells['F3'], cells['G3'], cells['H3'], cells['I3'], cells['J3']]
+    rows << :separator
+    rows << [4, cells['A4'], cells['B4'], cells['C4'], cells['D4'], cells['E4'], cells['F4'], cells['G4'], cells['H4'], cells['I4'], cells['J4']]
+    rows << :separator
+    rows << [5, cells['A5'], cells['B5'], cells['C5'], cells['D5'], cells['E5'], cells['F5'], cells['G5'], cells['H5'], cells['I5'], cells['J5']]
+    rows << :separator
+    rows << [6, cells['A6'], cells['B6'], cells['C6'], cells['D6'], cells['E6'], cells['F6'], cells['G6'], cells['H6'], cells['I6'], cells['J6']]
+    rows << :separator
+    rows << [7, cells['A7'], cells['B7'], cells['C7'], cells['D7'], cells['E7'], cells['F7'], cells['G7'], cells['H7'], cells['I7'], cells['J7']]
+    rows << :separator
+    rows << [8, cells['A8'], cells['B8'], cells['C8'], cells['D8'], cells['E8'], cells['F8'], cells['G8'], cells['H8'], cells['I8'], cells['J8']]
+    rows << :separator
+    rows << [9, cells['A9'], cells['B9'], cells['C9'], cells['D9'], cells['E9'], cells['F9'], cells['G9'], cells['H9'], cells['I9'], cells['J9']]
+    rows << :separator
+    rows << [10, cells['A10'], cells['B10'], cells['C10'], cells['D10'], cells['E10'], cells['F10'], cells['G10'], cells['H10'], cells['I10'], cells['J10']]
+    end
+
+    puts table
+  end
+
+  def print_board_gg
+    require 'terminal-table'
+
+    self.cells = {"A1" => 'G', "B1" => 'A', "C1" => 'M', "D1" => 'E', "E1" => '💩', "F1" => 'O', "G1" => 'V', "H1" => 'E', "I1" => 'R',
+    "J1" => '!',
+
+    "A2" => 'G', "B2" => 'A', "C2" => 'M', "D2" => 'E', "E2" => '💩', "F2" => 'O', "G2" => 'V', "H2" => 'E', "I2" => 'R', "J2" => '!',
+
+    "A3" => 'G', "B3" => 'A', "C3" => 'M', "D3" => 'E', "E3" => '💩', "F3" => 'O', "G3" => 'V', "H3" => 'E', "I3" => 'R', "J3" => '!',
+
+    "A4" => 'G', "B4" => 'A', "C4" => 'M', "D4" => 'E', "E4" => '💩', "F4" => 'O', "G4" => 'V', 'H4' => 'E', 'I4' => 'R', 'J4' => '!',
+
+    'A5' => 'G', 'B5' => 'A', 'C5' => 'M', 'D5' => 'E', 'E5' => '💩', 'F5' => 'O', 'G5' => 'V', 'H5' => 'E', 'I5' => 'R', 'J5' => '!',
+
+    'A6' => 'G', 'B6' => 'A', 'C6' => 'M', 'D6' => 'E', 'E6' => '💩', 'F6' => 'O', 'G6' => 'V', 'H6' => 'E', 'I6' => 'R', 'J6' => '!',
+
+    'A7' => 'G', 'B7' => 'A', 'C7' => 'M', 'D7' => 'E', 'E7' => '💩', 'F7' => 'O', 'G7' => 'V', 'H7' => 'E', 'I7' => 'R', 'J7' => '!',
+
+    'A8' => 'G', 'B8' => 'A', 'C8' => 'M', 'D8' => 'E', 'E8' => '💩', 'F8' => 'O', 'G8' => 'V', 'H8' => 'E', 'I8' => 'R', 'J8' => '!',
+
+    'A9' => 'G', 'B9' => 'A', 'C9' => 'M', 'D9' => 'E', 'E9' => '💩', 'F9' => 'O', 'G9' => 'V', 'H9' => 'E', 'I9' => 'R', 'J9' => '!',
+
+    'A10' => 'G', 'B10' => 'A', 'C10' => 'M', 'D10' => 'E', 'E10' => '💩', 'F10' => 'O', 'G10' => 'V', 'H10' => 'E', 'I10' => 'R', 'J10' => '!',
+  }
 
     table = Terminal::Table.new do |rows|
     rows << ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
